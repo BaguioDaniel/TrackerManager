@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navigation() {
   return (
     <nav className="navigation">
-      <h1 className="logo">TrackerManager</h1>
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <span className="logo">TrackerManager</span>
+      </Link>
       <ul className="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/projects">Projects</a></li>
-        <li><a href="/tasks">Tasks</a></li>
-        <li><a href="/login">Login</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/">Projects</Link></li>
+        <li><a href="#tasks">Tasks</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   );
