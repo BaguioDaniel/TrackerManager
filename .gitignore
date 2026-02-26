@@ -11,3 +11,13 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
+
+# Configuration files with secrets
+backend/appsettings.json
+backend/appsettings.Development.json
+backend/appsettings.Production.json
+
+# Environment files
+.env
+.env.local
+.env.*.local
