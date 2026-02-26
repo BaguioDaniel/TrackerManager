@@ -6,6 +6,8 @@ import Features from './components/features';
 import Footer from './components/footer';
 import Tasks from './components/tasks';
 import ProjectDetail from './components/project-detail';
+import Login from './components/login';
+import Signup from './components/signup';
 import { createContentfulClient, fetchContentfulProjects } from './utils/contentfulUtils';
 import { LOG_EVENTS } from './utils/constants';
 
@@ -37,6 +39,8 @@ function App() {
               <Tasks projects={projects} />
             </>
           } />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/projects/:slug" element={<ProjectDetail projects={projects} />} />
         </Routes>
         <Footer />

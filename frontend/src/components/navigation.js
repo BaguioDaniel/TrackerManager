@@ -11,7 +11,7 @@ function Navigation() {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/">Projects</Link></li>
         <li><a href="#tasks">Tasks</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><Link to="/login">Login</Link></li>
       </ul>
     </nav>
   );

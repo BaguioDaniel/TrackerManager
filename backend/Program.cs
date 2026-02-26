@@ -1,8 +1,37 @@
+using backend.Data;
+using backend.Services;
+using MongoDB.Driver;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
+
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+// Add MongoDB Client
+var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDB") 
+    ?? throw new InvalidOperationException("Connection string 'MongoDB' not found.");
+var mongoClient = new MongoClient(mongoConnectionString);
+builder.Services.AddSingleton<IMongoClient>(mongoClient);
+builder.Services.AddScoped(sp =>
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    return new ApplicationDbContext(client);
+});
+
+// Add Authentication Service
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
@@ -13,6 +42,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
+app.MapControllers();
 
 var summaries = new[]
 {

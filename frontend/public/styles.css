@@ -183,7 +183,7 @@ img {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
   gap: 2rem;
 }
 
@@ -228,7 +228,7 @@ img {
 
 .projects-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -265,6 +265,108 @@ img {
 .projects-container a {
   color: inherit;
   text-decoration: none;
+}
+
+/* ========================================
+   LOGIN PAGE
+   ======================================== */
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-card h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #f5c6cb;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: #667eea;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.login-button:hover {
+  background-color: #764ba2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #666;
+}
+
+.signup-link a {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.signup-link a:hover {
+  color: #764ba2;
 }
 
 /* ========================================
@@ -348,6 +450,10 @@ img {
     font-size: 1.75rem;
   }
 
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .projects-container {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
@@ -365,6 +471,15 @@ img {
   .footer-content {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .login-card {
+    padding: 2rem;
+  }
+
+  .login-card h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -433,6 +548,23 @@ img {
 
   .feature-card {
     padding: 1rem;
+  }
+
+  .login {
+    padding: 1rem;
+  }
+
+  .login-card {
+    padding: 1.5rem;
+  }
+
+  .login-card h1 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group input {
+    font-size: 16px;
   }
 }
 
