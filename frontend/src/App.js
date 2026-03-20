@@ -7,6 +7,7 @@ import LandingPage from './components/landing-page';
 import Features from './components/features';
 import Footer from './components/footer';
 import Tasks from './components/tasks';
+import TasksPage from './components/tasks-page';
 import Projects from './components/projects';
 import ProjectDetail from './components/project-detail';
 import Login from './components/login';
@@ -101,6 +102,7 @@ function App() {
           <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
           <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
           <Route path="/get-started" element={user ? <GetStarted /> : <Navigate to="/login" />} />
+          <Route path="/tasks" element={user ? <TasksPage /> : <Navigate to="/login" />} />
           <Route path="/projects" element={user ? <Projects projects={projects} /> : <Navigate to="/login" />} />
           <Route path="/projects/:slug" element={<ProjectDetail projects={projects} />} />
         </Routes>

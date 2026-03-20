@@ -33,6 +33,9 @@ builder.Services.AddScoped(sp =>
 // Add Authentication Service
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Add Task Service
+builder.Services.AddScoped<ITaskService, TaskService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

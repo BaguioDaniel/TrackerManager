@@ -1,6 +1,65 @@
 @backend_HostAddress = http://localhost:5259
+@userId = 507f1f77bcf86cd799439011
+@taskId = 
 
 GET {{backend_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+# CREATE A NEW TASK
+POST {{backend_HostAddress}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Design homepage mockups",
+  "description": "Create wireframes and design mockups for the landing page",
+  "projectSlug": "tracker-app",
+  "assignedTo": "{{userId}}",
+  "status": "ToDo",
+  "priority": "High",
+  "dueDate": "2026-04-15T00:00:00Z"
+}
+
+###
+# CREATE ANOTHER TASK
+POST {{backend_HostAddress}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Setup database schema",
+  "description": "Create MongoDB collections and indexes",
+  "projectSlug": "tracker-app",
+  "status": "InProgress",
+  "priority": "Critical",
+  "dueDate": "2026-03-25T00:00:00Z"
+}
+
+###
+# GET ALL TASKS
+GET {{backend_HostAddress}}/api/tasks/all
+Accept: application/json
+
+###
+# GET USER'S TASKS
+GET {{backend_HostAddress}}/api/tasks/user/{{userId}}
+Accept: application/json
+
+###
+# GET PROJECT TASKS
+GET {{backend_HostAddress}}/api/tasks/project/tracker-app
+Accept: application/json
+
+###
+# UPDATE A TASK
+PUT {{backend_HostAddress}}/api/tasks/{{taskId}}
+Content-Type: application/json
+
+{
+  "status": "Completed",
+  "priority": "Low"
+}
+
+###
+# DELETE A TASK
+DELETE {{backend_HostAddress}}/api/tasks/{{taskId}}
+Accept: application/json

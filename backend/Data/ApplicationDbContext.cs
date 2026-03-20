@@ -13,5 +13,6 @@ namespace backend.Data
         }
 
         public IMongoCollection<User> Users => _database.GetCollection<User>("users");
+        public IMongoCollection<Task> Tasks => _database.GetCollection<Task>("tasks");
     }
 }
