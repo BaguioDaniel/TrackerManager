@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Homepage() {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -9,10 +10,12 @@ function Homepage() {
         <h1>Welcome, {user.firstName || 'User'}</h1>
         <p>Track your projects and manage tasks efficiently</p>
         <div className="user-features">
-          <div className="feature-card">
-            <h3>My Projects</h3>
-            <p>View and work on your assigned projects</p>
-          </div>
+          <Link to="/projects" style={{ textDecoration: 'none' }}>
+            <div className="feature-card">
+              <h3>My Projects</h3>
+              <p>View and work on your assigned projects</p>
+            </div>
+          </Link>
           <div className="feature-card">
             <h3>My Tasks</h3>
             <p>Keep track of your assigned tasks</p>
@@ -22,7 +25,9 @@ function Homepage() {
             <p>Monitor your personal progress and achievements</p>
           </div>
         </div>
-        <button className="cta-button">Get Started</button>
+        <Link to="/get-started" style={{ textDecoration: 'none' }}>
+          <button className="cta-button">Get Started</button>
+        </Link>
       </div>
     </section>
   );

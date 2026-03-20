@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ManagerHomepage() {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -26,7 +27,9 @@ function ManagerHomepage() {
             <p>Generate detailed reports on project progress</p>
           </div>
         </div>
-        <button className="cta-button manager-button">View Dashboard</button>
+        <Link to="/get-started" style={{ textDecoration: 'none' }}>
+          <button className="cta-button manager-button">Get Started</button>
+        </Link>
       </div>
     </section>
   );

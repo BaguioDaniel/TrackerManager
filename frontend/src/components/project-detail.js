@@ -13,7 +13,7 @@ function ProjectDetail({ projects }) {
   if (error || !project) {
     return (
       <section className="project-detail">
-        <Link to="/" className="back-link">← Back to Projects</Link>
+        <Link to="/projects" className="back-link">← Back to Projects</Link>
         <p>Project not found.</p>
       </section>
     );
@@ -21,7 +21,7 @@ function ProjectDetail({ projects }) {
 
   return (
     <section className="project-detail">
-      <Link to="/" className="back-link">← Back to Projects</Link>
+      <Link to="/projects" className="back-link">← Back to Projects</Link>
       <div className="project-detail-content">
         <h1>{project.fields.title}</h1>
         
