@@ -8,7 +8,8 @@ function Signup() {
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: 'User'
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -55,14 +56,16 @@ function Signup() {
           email: formData.email,
           password: formData.password,
           firstName: formData.firstName,
-          lastName: formData.lastName
+          lastName: formData.lastName,
+          role: formData.role
         })
       });
 
       const data = await response.json();
+      console.log('Registration response:', data); // Debug log
 
       if (response.ok && data.success) {
-        logger.log('REGISTRATION_SUCCESS', { email: formData.email });
+        logger.log('REGISTRATION_SUCCESS', { email: formData.email, role: formData.role });
         // Redirect to login page
         navigate('/login', {
           state: { message: 'Registration successful! Please log in.' }
@@ -123,6 +126,20 @@ function Signup() {
                 placeholder="you@example.com"
                 required
               />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="role">Account Type</label>
+              <select
+                id="role"
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                required
+              >
+                <option value="User">Normal User</option>
+                <option value="Manager">Manager</option>
+              </select>
             </div>
 
             <div className="form-group">

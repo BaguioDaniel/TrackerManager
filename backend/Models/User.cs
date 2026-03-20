@@ -1,8 +1,16 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
 
 namespace backend.Models
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum UserRole
+    {
+        Manager,
+        User
+    }
+
     public class User
     {
         [BsonId]
@@ -19,6 +27,9 @@ namespace backend.Models
 
         [BsonElement("lastName")]
         public string? LastName { get; set; }
+
+        [BsonElement("role")]
+        public UserRole Role { get; set; } = UserRole.User;
 
         [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

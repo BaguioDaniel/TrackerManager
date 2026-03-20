@@ -1,3 +1,5 @@
+using backend.Models;
+
 namespace backend.DTOs
 {
     public class RegisterRequest
@@ -6,5 +8,6 @@ namespace backend.DTOs
         public required string Password { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public UserRole Role { get; set; } = UserRole.User;
     }
 }

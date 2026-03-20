@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import logger from '../services/logger';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     
     // Basic validation
     if (!email || !password) {
@@ -17,13 +20,43 @@ function Login() {
       return;
     }
 
-    // Log the login attempt
-    logger.log('LOGIN_ATTEMPT', { email });
+    setLoading(true);
 
-    // Here you would typically make an API call
-    // For now, we'll just redirect to home
-    logger.log('LOGIN_SUCCESS', { email });
-    navigate('/');
+    try {
+      // Log the login attempt
+      logger.log('LOGIN_ATTEMPT', { email });
+
+      // Call backend login endpoint
+      const response = await fetch('http://localhost:5259/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify(data.user));
+        // Dispatch custom event to notify App component
+        window.dispatchEvent(new Event('userLoggedIn'));
+        logger.log('LOGIN_SUCCESS', { email, role: data.user.role });
+        navigate('/');
+      } else {
+        setError(data.message || 'Login failed. Please try again.');
+        logger.log('LOGIN_FAILED', { email, error: data.message });
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+      logger.log('LOGIN_ERROR', { error: err.message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -31,6 +64,10 @@ function Login() {
       <div className="login-container">
         <div className="login-card">
           <h1>Login to TrackerManager</h1>
+          
+          {location.state?.message && (
+            <div className="success-message">{location.state.message}</div>
+          )}
           
           {error && <div className="error-message">{error}</div>}
           
@@ -43,6 +80,7 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
+                disabled={loading}
               />
             </div>
 
@@ -54,11 +92,12 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
+                disabled={loading}
               />
             </div>
 
-            <button type="submit" className="login-button">
-              Sign In
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 

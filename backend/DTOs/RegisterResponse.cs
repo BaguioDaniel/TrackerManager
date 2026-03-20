@@ -1,3 +1,5 @@
+using backend.Models;
+
 namespace backend.DTOs
 {
     public class RegisterResponse
@@ -13,6 +15,7 @@ namespace backend.DTOs
         public required string Email { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public UserRole Role { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

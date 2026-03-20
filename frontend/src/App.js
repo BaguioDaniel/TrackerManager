@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navigation from './components/navigation';
 import Homepage from './components/homepage';
+import ManagerHomepage from './components/manager-homepage';
+import LandingPage from './components/landing-page';
 import Features from './components/features';
 import Footer from './components/footer';
 import Tasks from './components/tasks';
@@ -14,6 +16,49 @@ import { LOG_EVENTS } from './utils/constants';
 function App() {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+
+    // Listen for storage changes (from other tabs)
+    window.addEventListener('storage', handleStorageChange);
+    
+    // For same-tab changes, listen for custom event
+    window.addEventListener('userLoggedIn', handleUserLogin);
+    window.addEventListener('userLoggedOut', handleUserLogout);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('userLoggedIn', handleUserLogin);
+      window.removeEventListener('userLoggedOut', handleUserLogout);
+    };
+  }, []);
+
+  const handleStorageChange = (e) => {
+    if (e.key === 'user') {
+      if (e.newValue) {
+        setUser(JSON.parse(e.newValue));
+      } else {
+        setUser(null);
+      }
+    }
+  };
+
+  const handleUserLogin = (e) => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  };
+
+  const handleUserLogout = () => {
+    setUser(null);
+  };
 
   useEffect(() => {
     const client = createContentfulClient();
@@ -27,23 +72,35 @@ function App() {
       .catch(err => setError(err.message));
   }, []);
 
+  // Determine which homepage to show based on user role
+  const getHomepageComponent = () => {
+    if (!user) {
+      // If not logged in, show landing page
+      return <LandingPage />;
+    }
+
+    if (user.role === 'Manager') {
+      return <ManagerHomepage />;
+    }
+
+    return <Homepage />;
+  };
+
   return (
     <Router>
       <div>
-        <Navigation />
+        {user && <Navigation user={user} />}
         <Routes>
           <Route path="/" element={
             <>
-              <Homepage />
-              <Features />
-              <Tasks projects={projects} />
+              {getHomepageComponent()}
             </>
           } />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+          <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
           <Route path="/projects/:slug" element={<ProjectDetail projects={projects} />} />
         </Routes>
-        <Footer />
+        {user && <Footer />}
         {error && <p>Error: {error}</p>}
       </div>
     </Router>

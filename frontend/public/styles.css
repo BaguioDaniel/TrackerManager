@@ -16,8 +16,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 100%);
+  background-attachment: fixed;
   color: #333;
+  min-height: 100vh;
 }
 
 code {
@@ -147,6 +149,90 @@ img {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* ========================================
+   LANDING PAGE
+   ======================================== */
+.landing-page {
+  color: white;
+  padding: 8rem 2rem;
+  text-align: center;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-content {
+  max-width: 800px;
+}
+
+.landing-content h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+}
+
+.landing-content .tagline {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+}
+
+.landing-content .description {
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button.primary-btn {
+  background-color: white;
+  color: #667eea;
+}
+
+.cta-button.primary-btn:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.cta-button.secondary-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+}
+
+.cta-button.secondary-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
 .cta-button {
   background-color: white;
   color: #667eea;
@@ -172,13 +258,18 @@ img {
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .features h2 {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 3rem;
-  color: #333;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .features-grid {
@@ -188,17 +279,18 @@ img {
 }
 
 .feature-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
   transition: all 0.3s ease;
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  background: white;
 }
 
 .feature-card h3 {
@@ -413,6 +505,106 @@ img {
 }
 
 /* ========================================
+   MANAGER BADGE & HOMEPAGE
+   ======================================== */
+.manager-badge {
+  background-color: rgba(255, 215, 0, 0.2);
+  border: 2px solid #FFD700;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #FFD700;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.manager-badge-nav {
+  background-color: #FFD700;
+  color: #333;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.manager-homepage {
+  background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+}
+
+.manager-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.manager-button {
+  background-color: #FFD700;
+  color: #764ba2;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.manager-button:hover {
+  background-color: #FFC700;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #ff5252;
+  transform: translateY(-2px);
+}
+
+.user-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #c3e6cb;
+}
+
+/* ========================================
    RESPONSIVE DESIGN
    ======================================== */
 @media (max-width: 768px) {
@@ -425,6 +617,11 @@ img {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+  }
+
+  .manager-features,
+  .user-features {
+    grid-template-columns: 1fr;
   }
 
   .homepage {
